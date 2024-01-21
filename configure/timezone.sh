@@ -26,7 +26,7 @@ if ls /usr/share/zoneinfo/"$region" &> /dev/null; then
         fi
 
     # Use echo to write the LANG setting to /etc/locale.conf
-    echo "LANG=$new_lang" | sudo tee /etc/locale.conf > /dev/null
+    echo "LANG=$new_lang" | tee /etc/locale.conf > /dev/null
 
     # Export the LANG variable
     export LANG=$new_lang
