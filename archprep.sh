@@ -28,7 +28,6 @@ do
                 mount ${device}3 /mnt
                 mkdir /mnt/boot
                 mkdir /mnt/home
-                mkdir -pv $LFS
                 mount ${device}1 /mnt/boot
                 swapon ${device}2
                 
@@ -39,7 +38,6 @@ do
                 mount ${device}3 /mnt
                 mkdir /mnt/boot
                 mkdir /mnt/home
-                mkdir -pv $LFS
                 mount ${device}1 /mnt/boot
                 swapon ${device}2
                 
