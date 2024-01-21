@@ -29,17 +29,17 @@ do
         echo '********* Arch  Installer *******'
         echo '*********************************'
         echo '1. Preparing for the Build'
-        echo '2. Building LFS Cross Toolchain & Temp Tools'
-        echo '3. Building the LFS System'
+        echo '2. null'
+        echo '3. null'
         echo '4. Documentation'
         echo '5. Exit'
         read option
         if [[ $option == "1" ]]; then
             . archprep.sh
         elif [[ $option == "2" ]]; then
-            . temptools.sh
+            . null.sh
         elif [[ $option == "3" ]]; then 
-            . buildlfs.sh
+            . null.sh
         elif [[ $option == "4" ]]; then
             . docs.sh
         elif [[ $option == "5" ]]; then
