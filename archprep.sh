@@ -13,13 +13,14 @@ do
         echo '3. Mount Partitions'
         echo '4. Install Essentials'
         echo '5. Return to Installer'
-        user="$(whoami)"    
+        user="$(whoami)"
+        dir=$(pwd)    
         read option 
         if [[ $option == "1" ]]; then
-            . /$user/prepare/internet.sh
+            . /$dir/prepare/internet.sh
 
         elif [[ $option == "2" ]]; then
-            . /$user/prepare/partition.sh
+            . /$dir/prepare/partition.sh
 
         elif [[ $option == "3" ]]; then 
             if [[ "$device" ]]; then
@@ -58,7 +59,7 @@ do
                 echo "Generated"
                 echo "Enter Chroot?"
                 if [[ $option == "y" ]]; then
-                    cp /home/arch-install /mnt
+                    cp /$user/arch-install /mnt
                     arch-chroot /mnt
                 elif [[ $option == "n" ]]; then
                     echo "Returning to Menu"
