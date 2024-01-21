@@ -31,7 +31,7 @@ do
         echo '1. Preparing for the Build'
         echo '2. null'
         echo '3. null'
-        echo '4. Documentation'
+        echo '4. Chroot into System'
         echo '5. Exit'
         read option
         if [[ $option == "1" ]]; then
@@ -41,7 +41,7 @@ do
         elif [[ $option == "3" ]]; then 
             . null.sh
         elif [[ $option == "4" ]]; then
-            . docs.sh
+            . chroot.sh
         elif [[ $option == "5" ]]; then
             exit
         else
