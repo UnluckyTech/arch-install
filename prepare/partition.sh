@@ -8,16 +8,10 @@ if [[ $erase == "y" ]]; then
     echo "This will take a minute depending on size."
     wipefs --all --force $device
 
-    # Create EFI system partition (assuming 1GiB size)
-    ( echo 'g' ; echo 'n' ; echo '1' ; echo '' ; echo '+1G' ; echo 't' ; echo '1' ) | fdisk "$device"
-
-    # Create swap partition (user-defined size)
+    # Create EFI system (assuming 1GiB size), swap partition (user-defined size), root partition with remaining space.
     echo "How much storage in GB would you like on swap?"
     read swapgb
-    ( echo 'n' ; echo '2' ; echo '' ; echo "+${swapgb}G" ; echo 't' ; echo '2' ; echo '19' ) | fdisk "$device"
-
-    # Create root partition with remaining space
-    ( echo 'n' ; echo '3' ; echo '' ; echo '' ; echo 'w' ) | fdisk "$device"
+    ( echo 'g' ; echo 'n' ; echo '1' ; echo '' ; echo '+1G' ; echo 't' ; echo '1' ; echo 'n' ; echo '2' ; echo '' ; echo "+${swapgb}G" ; echo 't' ; echo '2' ; echo '19' ; echo 'n' ; echo '3' ; echo '' ; echo '' ; echo 'w' ) | fdisk "$device"
 
     # Format partitions
     mkfs.fat -F32 "${device}1"  # Format EFI partition
