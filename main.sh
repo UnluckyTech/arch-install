@@ -20,7 +20,7 @@ do
     echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
     echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
     echo ''
-    sleep 10
+    sleep 3
     clear
     if [ "$(cat /sys/firmware/efi/fw_platform_size)" = "64" ]; then
     echo "UEFI and 64-bit system detected. Continuing with the script..."

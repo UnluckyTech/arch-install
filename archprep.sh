@@ -2,7 +2,7 @@
 while true
 do
     if [ "$(cat /sys/firmware/efi/fw_platform_size)" = "64" ]; then
-    echo "UEFI and 64-bit system detected. Continuing with the script..."
+        echo "UEFI and 64-bit system detected. Continuing with the script..."
         echo ''
         echo '*********************************'
         echo '******** Arch Prep Script *******'
@@ -16,11 +16,10 @@ do
         user="$(whoami)"    
         read option 
         if [[ $option == "1" ]]; then
-            . /$user/internet.sh
+            . /$user/prepare/internet.sh
 
         elif [[ $option == "2" ]]; then
-            if [ $(whoami) == "root" ]; then
-            . /$user/partition.sh
+            . /$user/prepare/partition.sh
 
         elif [[ $option == "3" ]]; then 
             if [[ "$device" ]]; then
