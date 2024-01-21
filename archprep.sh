@@ -12,50 +12,15 @@ do
         echo '2. Partition Drive'
         echo '3. Mount Partitions'
         echo '4. Install Essentials'
-        echo '5. Return to Installer'    
+        echo '5. Return to Installer'
+        user="$(whoami)"    
         read option 
         if [[ $option == "1" ]]; then
-            . internet.sh
+            . /$user/internet.sh
 
         elif [[ $option == "2" ]]; then
             if [ $(whoami) == "root" ]; then
-                fdisk -l
-                echo "What drive are we working with?"
-                read device
-                echo "Are you sure you want to format $device ? [y/n]"
-                read erase
-                if [[ $erase == "y" ]]; then
-                    echo "This will take a minute depending on size."
-                    wipefs --all --force $device
-
-                    # Create EFI system partition (assuming 1GiB size)
-                    ( echo 'g' ; echo 'n' ; echo '1' ; echo '' ; echo '+1G' ; echo 't' ; echo '1' ) | fdisk "$device"
-
-                    # Create swap partition (user-defined size)
-                    echo "How much storage in GB would you like on swap?"
-                    read swapgb
-                    ( echo 'n' ; echo '2' ; echo '' ; echo "+${swapgb}G" ; echo 't' ; echo '2' ; echo '19' ) | fdisk "$device"
-
-                    # Create root partition with remaining space
-                    ( echo 'n' ; echo '3' ; echo '' ; echo '' ; echo 'w' ) | fdisk "$device"
-
-                    # Format partitions
-                    mkfs.fat -F32 "${device}1"  # Format EFI partition
-                    mkfs.ext4 "${device}3"      # Format root partition
-                    mkswap "${device}2"         # Format swap partition
-
-                    # Display partition information
-                    fdisk -l
-                    echo "For drive $device, you should see 3 partitions."
-                    echo "Returning to menu"
-                    sleep 5
-                elif [[ $erase == "n" ]]; then
-                    echo "Returning to Menu"
-                fi
-            else
-                echo "You need to be root to run this script."
-                exit 1
-            fi
+            . /$user/partition.sh
 
         elif [[ $option == "3" ]]; then 
             if [[ "$device" ]]; then

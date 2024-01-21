@@ -23,6 +23,6 @@ do
         sleep 5
         iwctl
     elif [[ $option == "3" ]]; then
-        exit
+        break
     fi
 done
