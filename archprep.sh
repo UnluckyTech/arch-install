@@ -58,7 +58,7 @@ do
                 echo "Enter Chroot?"
                 read option
                 if [[ $option == "y" ]]; then
-                    cp /$user/arch-install /mnt
+                    cp -rf /$user/arch-install /mnt
                     arch-chroot /mnt
                 elif [[ $option == "n" ]]; then
                     echo "Returning to Menu"
