@@ -10,8 +10,8 @@ echo "Hostname set to $hostname."
 sleep 2
 systemctl enable fstrim.timer
 
-read option
 echo "Would you like to update repo's used? (y/n)"
+read option
 if [[ $option == "y" ]]; then
     pacman -S nano
     nano /etc/pacman.conf
