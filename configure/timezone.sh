@@ -16,9 +16,23 @@ if ls /usr/share/zoneinfo/"$region" &> /dev/null; then
     echo "Entering /etc/locale.gen"
     sed -i "s/^# $locale_line/$locale_line/" "$locale_file"
     locale-gen
-    echo LANG=en_US.UTF-8 &gt; /etc/locale.conf
-    export LANG=en_US.UTF-8
-    echo "Locale configuration updated."
+    touch /etc/locale.conf
+    # Specify the desired LANG setting
+    new_lang="en_US.UTF-8"
+
+    # Check if /etc/locale.conf exists, create it if not
+        if [ ! -f "/etc/locale.conf" ]; then
+            sudo touch /etc/locale.conf
+        fi
+
+    # Use echo to write the LANG setting to /etc/locale.conf
+    echo "LANG=$new_lang" | sudo tee /etc/locale.conf > /dev/null
+
+    # Export the LANG variable
+    export LANG=$new_lang
+
+    echo "Locale configuration updated to $new_lang."
+
 else
     echo "Incorrect region. Please try again."
 fi
