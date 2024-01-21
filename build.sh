@@ -4,8 +4,8 @@ echo '*********************************'
 echo '********* Configure Arch  *******'
 echo '*********************************'
 echo '1. Set Time Zone'
-echo '2. Configure Build'
-echo '3. null'
+echo '2. Network & Package Manager'
+echo '3. Root & User'
 echo '4. Chroot into System'
 echo '5. Exit'
 dir=$(pwd)
@@ -13,9 +13,9 @@ read option
 if [[ $option == "1" ]]; then
     . /$dir/configure/timezone.sh
 elif [[ $option == "2" ]]; then
-    . build.sh
+    . /$dir/configure/network.sh
 elif [[ $option == "3" ]]; then 
-    . null.sh
+    . /$dir/configure/user.sh
 elif [[ $option == "4" ]]; then
     . chroot.sh
 elif [[ $option == "5" ]]; then
