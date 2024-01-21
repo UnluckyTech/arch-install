@@ -10,16 +10,17 @@ echo "Hostname set to $hostname."
 sleep 2
 systemctl enable fstrim.timer
 
-pacman_conf="/etc/pacman.conf"
-section="#[multilib]"
-mirror="#Include = /etc/pacman.d/mirrorlist"
-newmirror="Include = /etc/pacman.d/mirrorlist"
+read option
+echo "Would you like to update repo's used? (y/n)"
+if [[ $option == "y" ]]; then
+    pacman -S nano
+    nano /etc/pacman.conf
+    pacman -Sy
+elif [[ $option == "n" ]]; then
+    break
+else
+    2>/dev/null
+    echo 'Incorrect command. Try again.'
+fi
 
-sed -i "" "s/$section/[multilib]/" $pacman_conf
-sed -i "" "s/$mirror/$newmirror/" $pacman_conf
-
-echo "Multilib section uncommented in $pacman_conf."
-echo "Updating..."
-sleep 2
-pacman -Sy
 
