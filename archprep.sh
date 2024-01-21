@@ -56,6 +56,7 @@ do
                 genfstab -U /mnt >> /mnt/etc/fstab
                 echo "Generated"
                 echo "Enter Chroot?"
+                read option
                 if [[ $option == "y" ]]; then
                     cp /$user/arch-install /mnt
                     arch-chroot /mnt
