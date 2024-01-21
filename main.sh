@@ -29,7 +29,7 @@ do
         echo '********* Arch  Installer *******'
         echo '*********************************'
         echo '1. Preparing for the Build'
-        echo '2. null'
+        echo '2. Configure Build'
         echo '3. null'
         echo '4. Chroot into System'
         echo '5. Exit'
@@ -37,7 +37,7 @@ do
         if [[ $option == "1" ]]; then
             . archprep.sh
         elif [[ $option == "2" ]]; then
-            . null.sh
+            . build.sh
         elif [[ $option == "3" ]]; then 
             . null.sh
         elif [[ $option == "4" ]]; then
