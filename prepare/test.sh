@@ -11,6 +11,11 @@ if [[ $erase == "y" ]]; then
     # Create EFI system partition (assuming 1GiB size)
     ( echo 'g' ; echo 'n' ; echo '1' ; echo '' ; echo '+1G' ; echo 't' ; echo '1' ) | fdisk "$device"
 
+    # Create swap partition (user-defined size)
+    echo "How much storage in GB would you like on swap?"
+    read swapgb
+    ( echo 'n' ; echo '2' ; echo '' ; echo "+${swapgb}G" ; echo 't' ; echo '2' ; echo '19' ) | fdisk "$device"
+
 
 elif [[ $erase == "n" ]]; then
     echo "Returning to Menu"
