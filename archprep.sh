@@ -34,7 +34,7 @@ do
                     # Create swap partition (user-defined size)
                     echo "How much storage in GB would you like on swap?"
                     read swapgb
-                    ( echo 'n' ; echo '2' ; echo '' ; echo "+${swapgb}G" ; echo 't' ; echo '2' ; echo '82' ) | fdisk "$device"
+                    ( echo 'n' ; echo '2' ; echo '' ; echo "+${swapgb}G" ; echo 't' ; echo '2' ; echo '19' ) | fdisk "$device"
 
                     # Create root partition with remaining space
                     ( echo 'n' ; echo '3' ; echo '' ; echo '' ; echo 'w' ) | fdisk "$device"
@@ -66,7 +66,7 @@ do
                 mkdir -pv $LFS
                 mount ${device}1 /mnt/boot
                 swapon ${device}2
-                exit 0
+                
             else
                 echo "What drive are we working with?"
                 read device 
@@ -77,7 +77,7 @@ do
                 mkdir -pv $LFS
                 mount ${device}1 /mnt/boot
                 swapon ${device}2
-                exit 0
+                
             fi
         elif [[ $option == "4" ]]; then
             if [ $(whoami) == "root" ]; then
@@ -104,7 +104,7 @@ do
                 exit 1
             fi
         elif [[ $option == "5" ]]; then
-            exit
+            break
 
         else
             2>/dev/null
