@@ -31,8 +31,9 @@ do
         echo '1. Preparing for the Build'
         echo '2. Configure Build'
         echo '3. Boot Loader'
-        echo '4. Chroot into System'
-        echo '5. Exit'
+        echo '4. Additional Configs'
+        echo '5. Chroot into System'
+        echo '6. Exit'
         read option
         if [[ $option == "1" ]]; then
             . archprep.sh
@@ -41,8 +42,10 @@ do
         elif [[ $option == "3" ]]; then 
             . boot.sh
         elif [[ $option == "4" ]]; then
-            . chroot.sh
+            . addition.sh
         elif [[ $option == "5" ]]; then
+            . chroot.sh
+        elif [[ $option == "6" ]]; then
             exit
         else
             2>/dev/null

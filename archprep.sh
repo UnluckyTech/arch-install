@@ -49,7 +49,7 @@ do
                 echo "Completed!"
                 sleep 2
                 echo "Installing Essential Packages"
-                pacstrap -K /mnt base linux linux-firmware
+                pacstrap -K /mnt base base-devel linux linux-firmware
                 echo "Essentials Installed!"
                 echo "Generating fstab"
                 sleep 1

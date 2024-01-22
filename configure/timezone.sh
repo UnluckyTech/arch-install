@@ -11,6 +11,7 @@ if ls /usr/share/zoneinfo/"$region" &> /dev/null; then
     echo "Timezone set to $timezone."
     echo "Generating Hardware Clock"
     hwclock --systohc
+    touch /etc/locale.conf
     locale_file="/etc/locale.conf"
     locale_line="en_US.UTF-8 UTF-8"
     echo "Entering /etc/locale.gen"

@@ -14,6 +14,7 @@ do
     if [[ $option == "1" ]]; then
         echo "rEFInd does require manual configuration"
         echo "Check docs for specifics"
+        pacman -S refind
         echo "Specify partition for rEFInd"
         read device
         echo "Installing..."

@@ -20,6 +20,8 @@ do
         echo "Enter Username"
         read username
         useradd -m -g users -G wheel,storage,power -s /bin/bash $username
+        echo "Enter User Password"
+        passwd $username
         echo "You will now add $username to sudo"
         sleep 2
         EDITOR=nano visudo
