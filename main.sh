@@ -30,7 +30,7 @@ do
         echo '*********************************'
         echo '1. Preparing for the Build'
         echo '2. Configure Build'
-        echo '3. null'
+        echo '3. Boot Loader'
         echo '4. Chroot into System'
         echo '5. Exit'
         read option
@@ -39,7 +39,7 @@ do
         elif [[ $option == "2" ]]; then
             . build.sh
         elif [[ $option == "3" ]]; then 
-            . null.sh
+            . boot.sh
         elif [[ $option == "4" ]]; then
             . chroot.sh
         elif [[ $option == "5" ]]; then
