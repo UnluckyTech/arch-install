@@ -17,7 +17,7 @@ do
     if [[ $option == "1" ]]; then
         echo "Configuring Network Manager"
         echo "Check docs for specifics"
-        pacman -S networkmanager
+        yes | pacman -S networkmanager
         systemctl enable NetworkManager
         echo "Done!"
 
@@ -25,8 +25,8 @@ do
         echo "NOTE: This is for Nvidia!"
         echo "Ctrl+C to exit."
         sleep 3
-        sudo pacman -S git linux-headers
-        sudo pacman -S nvidia-dkms libglvnd nvidia-utils opencl-nvidia lib32-libglvnd lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings
+        sudo yes | pacman -S git linux-headers
+        sudo yes | pacman -S nvidia-dkms libglvnd nvidia-utils opencl-nvidia lib32-libglvnd lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings
         echo "Modifying mkinitcpio config..."
         sudo nano /etc/mkinitcpio.conf
         sudo mkdir /etc/pacman.d/hooks
@@ -54,12 +54,12 @@ do
 
 
     elif [[ $option == "3" ]]; then
-        sudo git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+        git clone https://aur.archlinux.org/pakku.git && cd pakku && makepkg -si
         echo "Done!"
     elif [[ $option == "4" ]]; then
-        sudo pacman -S xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
+        sudo yes | pacman -S xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
     elif [[ $option == "5" ]]; then
-        sudo pacman -S gnome sddm
+        sudo yes | pacman -S gnome sddm
         sudo systemctl enable sddm.service
     elif [[ $option == "6" ]]; then
         exit

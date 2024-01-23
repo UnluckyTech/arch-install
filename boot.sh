@@ -22,11 +22,21 @@ do
         refind-install --usedefault $device --alldrivers
         mkrlconf
         echo "Done!"
-        echo "Now entering boot config..."
+        echo "Editing boot config..."
         sleep 2
-        nano /boot/refind_linux.conf
+        # Specify the content
+        content='"Boot with minimal options" "ro root='"$device"'"'
+        # Specify the file path
+        refind_linux_conf="/boot/refind_linux.conf"
+        # Use echo to create/replace the file with the specified content
+        echo "$content" | sudo tee "$refind_linux_conf" > /dev/null
+        echo "File replaced: $refind_linux_conf"
         echo "Now entering rEFInd config"
         nano /boot/EFI/BOOT/refind.conf
+        mkdir /boot/EFI/refind/themes
+        cd /boot/EFI/refind/themes
+        git clone https://github.com/kgoettler/ursamajor-rEFInd.git
+        echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/BOOT/refind.conf
         echo "Done! Hopefully it works!"
     elif [[ $option == "2" ]]; then
         echo "No idea yet"
