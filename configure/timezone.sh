@@ -5,6 +5,7 @@ echo "Enter Region"
 read region
 if ls /usr/share/zoneinfo/"$region" &> /dev/null; then
     echo "Region is correct. Enter your city: "
+    ls /usr/share/zoneinfo/$region
     read city
     timezone="$region/$city"
     ln -sf /usr/share/zoneinfo/"$timezone" /etc/localtime

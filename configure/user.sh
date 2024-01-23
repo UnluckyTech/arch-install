@@ -24,7 +24,12 @@ do
         passwd $username
         echo "You will now add $username to sudo"
         sleep 2
-        EDITOR=nano visudo
+
+        # Uncomment %wheel ALL=(ALL) ALL
+        sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
+
+        # Append Defaults rootpw at the very bottom
+        echo "Defaults rootpw" >> /etc/sudoers
 
     elif [[ $option == "3" ]]; then
         exit
