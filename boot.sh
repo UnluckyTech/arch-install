@@ -25,7 +25,7 @@ do
         echo "Editing boot config..."
         sleep 2
         # Specify the content
-        content='"Boot with minimal options" "ro root='"$device"'"'
+        content='"Boot with minimal options" "ro root='"${device}2"'"'
         # Specify the file path
         refind_linux_conf="/boot/refind_linux.conf"
         # Use echo to create/replace the file with the specified content
@@ -38,6 +38,9 @@ do
         git clone https://github.com/kgoettler/ursamajor-rEFInd.git
         echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/BOOT/refind.conf
         echo "Done! Hopefully it works!"
+
+        # FIX THE ABOVE TEXT IT DONT WORK!!!
+
     elif [[ $option == "2" ]]; then
         echo "No idea yet"
 
