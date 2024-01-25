@@ -33,8 +33,8 @@ do
         echo "File replaced: $refind_linux_conf"
         echo "Now entering rEFInd config"
         nano /boot/EFI/BOOT/refind.conf
-        mkdir /boot/EFI/refind/themes
-        cd /boot/EFI/refind/themes
+        mkdir /boot/EFI/BOOT/themes
+        cd /boot/EFI/BOOT/themes
         git clone https://github.com/kgoettler/ursamajor-rEFInd.git
         echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/BOOT/refind.conf
         echo "Done! Hopefully it works!"
