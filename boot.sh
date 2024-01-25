@@ -24,7 +24,7 @@ do
         echo "Done!"
         echo "Editing boot config..."
         # Specify the content
-        content='"Boot with minimal options" "ro root='"${device}2"'"'
+        content='"Boot with minimal options" "ro root='"${device}3"'"'
         # Specify the file path
         refind_linux_conf="/boot/refind_linux.conf"
         # Use echo to create/replace the file with the specified content
