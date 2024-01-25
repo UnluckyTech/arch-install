@@ -10,7 +10,7 @@ do
     echo '2. Graphics Drivers (Nvidia)'
     echo '3. Aur Helper (Pakku)'
     echo '4. Display Manager (X)'
-    echo '5. Display Manager (X)'
+    echo '5. SDDM'
     echo '6. Desktop Environment (GNOME)'
     echo '7. Exit'
     dir=$(pwd)
@@ -58,7 +58,7 @@ do
         git clone https://aur.archlinux.org/pakku.git && cd pakku && makepkg -si
         echo "Done!"
     elif [[ $option == "4" ]]; then
-        sudo yes | pacman -S xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
+        pacman -S xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
     elif [[ $option == "5" ]]; then
         sudo yes | pacman -S sddm
         mkdir /etc/sddm.conf.d
