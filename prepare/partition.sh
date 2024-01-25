@@ -41,6 +41,10 @@ if [[ $erase == "y" ]]; then
             echo "For drive $device, you should see 3 partitions."
             echo "Returning to menu"
             sleep 2
+        else
+            echo "Incorrect Command"
+            exit 1
+        fi
 elif [[ $erase == "n" ]]; then
     echo "Returning to Menu"
 else
