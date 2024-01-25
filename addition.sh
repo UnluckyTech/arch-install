@@ -82,7 +82,7 @@ do
             echo "Error: $sddm_conf_path does not exist."
         fi
     elif [[ $option == "6" ]]; then
-        sudo yes | pacman -S gnome
+        pacman -S gnome
     elif [[ $option == "7" ]]; then
         exit
     else
