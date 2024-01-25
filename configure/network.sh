@@ -7,7 +7,6 @@ read hostname
 echo "$hostname" | tee /etc/hostname > /dev/null
 
 echo "Hostname set to $hostname."
-sleep 2
 systemctl enable fstrim.timer
 
 echo "Would you like to update repo's used? (y/n)"

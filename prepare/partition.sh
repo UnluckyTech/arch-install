@@ -22,7 +22,7 @@ if [[ $erase == "y" ]]; then
     fdisk -l
     echo "For drive $device, you should see 3 partitions."
     echo "Returning to menu"
-    sleep 5
+    sleep 2
 elif [[ $erase == "n" ]]; then
     echo "Returning to Menu"
 else

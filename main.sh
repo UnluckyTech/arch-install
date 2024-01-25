@@ -15,12 +15,12 @@ do
     echo "%%%%%                                                                    %%%%%"
     echo "%%%%% Please look over the README.md before using this installer         %%%%%"
     echo "%%%%%                                                                    %%%%%"
-    echo "%%%%% Script will begin in 10 seconds.                                   %%%%%"
+    echo "%%%%% Script will begin in 5 seconds.                                    %%%%%"
     echo "%%%%%                                                                    %%%%%"
     echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
     echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
     echo ''
-    sleep 3
+    sleep 5
     clear
     if [ "$(cat /sys/firmware/efi/fw_platform_size)" = "64" ]; then
     echo "UEFI and 64-bit system detected. Continuing with the script..."

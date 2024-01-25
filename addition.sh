@@ -24,7 +24,7 @@ do
     elif [[ $option == "2" ]]; then
         echo "NOTE: This is for Nvidia!"
         echo "Ctrl+C to exit."
-        sleep 3
+        sleep 2
         sudo yes | pacman -S git linux-headers
         sudo yes | pacman -S nvidia-dkms libglvnd nvidia-utils opencl-nvidia lib32-libglvnd lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings
         echo "Modifying mkinitcpio config..."

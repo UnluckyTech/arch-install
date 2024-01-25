@@ -47,12 +47,10 @@ do
                 echo "Ranking Mirrors"
                 reflector
                 echo "Completed!"
-                sleep 2
                 echo "Installing Essential Packages"
                 pacstrap -K /mnt base base-devel linux linux-firmware
                 echo "Essentials Installed!"
                 echo "Generating fstab"
-                sleep 1
                 genfstab -U /mnt >> /mnt/etc/fstab
                 echo "Generated"
                 echo "Enter Chroot?"

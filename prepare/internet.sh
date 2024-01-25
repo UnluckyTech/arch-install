@@ -20,7 +20,7 @@ do
     elif [[ $option == "2" ]]; then
         echo "Launching iwctl"
         echo "To get interactive prompt do: 'help' "
-        sleep 5
+        sleep 3
         iwctl
     elif [[ $option == "3" ]]; then
         break
