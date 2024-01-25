@@ -10,6 +10,7 @@ do
     echo '2. GRUB'
     echo '3. Exit'
     dir=$(pwd)
+    user=$(whoami)
     read option
     if [[ $option == "1" ]]; then
         echo "rEFInd does require manual configuration"
@@ -36,6 +37,7 @@ do
         cd /boot/EFI/BOOT/themes
         git clone https://github.com/kgoettler/ursamajor-rEFInd.git
         echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/BOOT/refind.conf
+        cd /$user/arch-install
         echo "Done! Hopefully it works!"
 
     elif [[ $option == "2" ]]; then

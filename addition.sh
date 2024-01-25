@@ -60,12 +60,11 @@ do
     elif [[ $option == "4" ]]; then
         pacman -S xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
     elif [[ $option == "5" ]]; then
-        pacman -S sddm
+        pacman -S sddm qt5-quickcontrols qt5-graphicaleffects
         mkdir /etc/sddm.conf.d
         cp /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf.d/sddm.conf
-        mkdir /usr/share/sddm/themes
         git clone https://github.com/MarianArlt/sddm-chili
-        mv sddm-chili /usr/share/sddm/themes
+        mv sddm-chili /usr/share/sddm/themes/chili
         sudo systemctl enable sddm.service
         # Path to the sddm.conf file
         sddm_conf_path="/etc/sddm.conf.d/sddm.conf"
