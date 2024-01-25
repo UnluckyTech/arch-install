@@ -8,10 +8,11 @@ do
     echo '*********************************'
     echo '1. Network Manager'
     echo '2. Graphics Drivers (Nvidia)'
-    echo '3. Aur Helper (Yay)'
+    echo '3. Aur Helper (Pakku)'
     echo '4. Display Manager (X)'
-    echo '5. Desktop Environment (GNOME)'
-    echo '6. Exit'
+    echo '5. Display Manager (X)'
+    echo '6. Desktop Environment (GNOME)'
+    echo '7. Exit'
     dir=$(pwd)
     read option
     if [[ $option == "1" ]]; then
@@ -59,9 +60,30 @@ do
     elif [[ $option == "4" ]]; then
         sudo yes | pacman -S xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
     elif [[ $option == "5" ]]; then
-        sudo yes | pacman -S gnome sddm
+        sudo yes | pacman -S sddm
+        mkdir /etc/sddm.conf.d
+        cp /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf.d/sddm.conf
+        mkdir /usr/share/sddm/themes
+        git clone https://github.com/MarianArlt/sddm-chili
+        mv sddm-chili /usr/share/sddm/themes
+        # Path to the sddm.conf file
+        sddm_conf_path="/etc/sddm.conf.d/sddm.conf"
+
+        # Theme name to set
+        theme_name="chili"
+
+        # Check if the sddm.conf file exists
+        if [ -e "$sddm_conf_path" ]; then
+            # Update the Current theme in sddm.conf
+            sed -i "s/^Current=.*/Current=$theme_name/" "$sddm_conf_path"
+            echo "SDDM theme updated to $theme_name"
+        else
+            echo "Error: $sddm_conf_path does not exist."
+        fi
         sudo systemctl enable sddm.service
     elif [[ $option == "6" ]]; then
+        sudo yes | pacman -S gnome
+    elif [[ $option == "7" ]]; then
         exit
     else
         2>/dev/null

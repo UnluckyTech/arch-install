@@ -19,7 +19,7 @@ do
     elif [[ $option == "3" ]]; then 
         . /$dir/configure/user.sh
     elif [[ $option == "4" ]]; then
-        exit
+        break
     else
         2>/dev/null
         echo 'Incorrect command. Try again.'

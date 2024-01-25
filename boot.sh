@@ -42,7 +42,7 @@ do
         echo "No idea yet"
 
     elif [[ $option == "3" ]]; then
-        exit
+        break
     else
         2>/dev/null
         echo 'Incorrect command. Try again.'
