@@ -14,12 +14,12 @@ do
     if [[ $option == "1" ]]; then
         echo "rEFInd does require manual configuration"
         echo "Check docs for specifics"
-        pacman -S refind
-        echo "Specify partition for rEFInd"
+        pacman -S git refind
+        echo "Specify drive for rEFInd"
         read device
         echo "Installing..."
 
-        refind-install --usedefault $device --alldrivers
+        refind-install --usedefault ${device}1 --alldrivers
         mkrlconf
         echo "Done!"
         echo "Editing boot config..."
