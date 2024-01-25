@@ -60,7 +60,7 @@ do
     elif [[ $option == "4" ]]; then
         pacman -S xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
     elif [[ $option == "5" ]]; then
-        sudo yes | pacman -S sddm
+        pacman -S sddm
         mkdir /etc/sddm.conf.d
         cp /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf.d/sddm.conf
         mkdir /usr/share/sddm/themes
