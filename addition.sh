@@ -66,6 +66,7 @@ do
         mkdir /usr/share/sddm/themes
         git clone https://github.com/MarianArlt/sddm-chili
         mv sddm-chili /usr/share/sddm/themes
+        sudo systemctl enable sddm.service
         # Path to the sddm.conf file
         sddm_conf_path="/etc/sddm.conf.d/sddm.conf"
 
@@ -80,7 +81,6 @@ do
         else
             echo "Error: $sddm_conf_path does not exist."
         fi
-        sudo systemctl enable sddm.service
     elif [[ $option == "6" ]]; then
         sudo yes | pacman -S gnome
     elif [[ $option == "7" ]]; then

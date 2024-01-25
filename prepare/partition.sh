@@ -40,7 +40,6 @@ if [[ $erase == "y" ]]; then
             fdisk -l
             echo "For drive $device, you should see 3 partitions."
             echo "Returning to menu"
-            sleep 2
         else
             echo "Incorrect Command"
             exit 1

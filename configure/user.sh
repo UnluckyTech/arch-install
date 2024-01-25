@@ -16,7 +16,7 @@ do
         passwd
         echo "Done!"
     elif [[ $option == "2" ]]; then
-        pacman --sync sudo
+        yes | pacman --sync sudo
         echo "Enter Username"
         read username
         useradd -m -g users -G wheel,storage,power -s /bin/bash $username
