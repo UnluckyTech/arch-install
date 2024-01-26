@@ -31,7 +31,6 @@ do
         # Use echo to create/replace the file with the specified content
         echo "$content" | sudo tee "$refind_linux_conf" > /dev/null
         echo "File replaced: $refind_linux_conf"
-        read device
         # Backup the original refind.conf
         cp /boot/EFI/BOOT/refind.conf /boot/EFI/BOOT/refind.conf.bak
         # Modify the refind.conf with the new options
