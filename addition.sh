@@ -11,7 +11,7 @@ do
     echo '3. Aur Helper (Pakku)'
     echo '4. Display Manager (X)'
     echo '5. SDDM'
-    echo '6. Desktop Environment (GNOME)'
+    echo '6. Desktop Environment'
     echo '7. Exit'
     dir=$(pwd)
     read option
@@ -82,6 +82,40 @@ do
         fi
     elif [[ $option == "6" ]]; then
         pacman -S gnome
+        echo ''
+        echo '*********************************'
+        echo '******* Desktop Environment *****'
+        echo '*********************************'
+        echo '1. GNOME'
+        echo '2. KDE Plasma'
+        echo '3. XFCE4'
+        echo '*********************************'
+        echo '********* Window Managers *******'
+        echo '*********************************'
+        echo '4. Hyprland (Wayland)'
+        echo '5. Awesome (Xorg)'
+        echo '6. I3wm'
+        echo '7. Exit'
+
+        read option
+        if [[ $option == "1" ]]; then
+            pacman -S gnome gnome-extra
+        elif [[ $option == "2" ]]; then
+            pacman -S plasma
+        elif [[ $option == "3" ]]; then 
+            pacman -S xfce4 xfce4-goodies
+        elif [[ $option == "4" ]]; then
+            pacman -S hyperland
+        elif [[ $option == "5" ]]; then
+            pacman -S awesome
+        elif [[ $option == "6" ]]; then
+            pacman -S i3-wm
+        elif [[ $option == "7" ]]; then
+            break
+        else
+            2>/dev/null
+            echo 'Incorrect command. Try again.'
+        fi
     elif [[ $option == "7" ]]; then
         exit
     else
