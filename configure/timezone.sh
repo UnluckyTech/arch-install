@@ -15,7 +15,7 @@ if ls /usr/share/zoneinfo/"$region" &> /dev/null; then
     locale_file="/etc/locale.gen"
     locale_line="en_US.UTF-8 UTF-8"
     echo "Entering $locale_file"
-    sed -i "s/^# $locale_line/$locale_line/" "$locale_file"
+    sed -i "/$locale_line/s/^#//" "$locale_file"
     locale-gen
     touch /etc/locale.conf
     echo LANG=en_US.UTF-8 > /etc/locale.conf
