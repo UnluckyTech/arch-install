@@ -12,29 +12,13 @@ if ls /usr/share/zoneinfo/"$region" &> /dev/null; then
     echo "Timezone set to $timezone."
     echo "Generating Hardware Clock"
     hwclock --systohc
-    touch /etc/locale.conf
-    locale_file="/etc/locale.conf"
+    locale_file="/etc/locale.gen"
     locale_line="en_US.UTF-8 UTF-8"
-    echo "Entering /etc/locale.gen"
+    echo "Entering $locale_file"
     sed -i "s/^# $locale_line/$locale_line/" "$locale_file"
     locale-gen
     touch /etc/locale.conf
-    # Specify the desired LANG setting
-    new_lang="en_US.UTF-8"
-
-    # Check if /etc/locale.conf exists, create it if not
-        if [ ! -f "/etc/locale.conf" ]; then
-            sudo touch /etc/locale.conf
-        fi
-
-    # Use echo to write the LANG setting to /etc/locale.conf
-    echo "LANG=$new_lang" | tee /etc/locale.conf > /dev/null
-
-    # Export the LANG variable
-    export LC_ALL=$new_lang
-    export LANG=$new_lang
-
-    echo "Locale configuration updated to $new_lang."
+    echo LANG=en_US.UTF-8 > /etc/locale.conf
 
 else
     echo "Incorrect region. Please try again."
