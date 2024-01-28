@@ -81,7 +81,6 @@ do
             echo "Error: $sddm_conf_path does not exist."
         fi
     elif [[ $option == "6" ]]; then
-        pacman -S gnome
         echo ''
         echo '*********************************'
         echo '******* Desktop Environment *****'
