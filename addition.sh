@@ -104,7 +104,7 @@ do
         elif [[ $option == "3" ]]; then 
             pacman -S xfce4 xfce4-goodies
         elif [[ $option == "4" ]]; then
-            pacman -S hyprland
+            pacman -S hyprland kitty
         elif [[ $option == "5" ]]; then
             pacman -S awesome
         elif [[ $option == "6" ]]; then
