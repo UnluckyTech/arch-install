@@ -104,7 +104,7 @@ do
         elif [[ $option == "3" ]]; then 
             pacman -S xfce4 xfce4-goodies
         elif [[ $option == "4" ]]; then
-            pacman -S hyprland kitty dunst xdg-desktop-portal-hyprland qt5-wayland qt6-wayland
+            pacman -S hyprland kitty gtk3 dunst xdg-desktop-portal-hyprland qt5-wayland qt6-wayland
         elif [[ $option == "5" ]]; then
             pacman -S awesome
         elif [[ $option == "6" ]]; then
