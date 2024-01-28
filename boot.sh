@@ -42,7 +42,7 @@ do
         cd /boot/EFI/BOOT/themes
         git clone https://github.com/kgoettler/ursamajor-rEFInd.git
         echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/BOOT/refind.conf
-        cd /$user/arch-install
+        cd /arch-install
         fatlabel ${device}1 ARCH
         echo "Done! Hopefully it works!"
 
