@@ -31,6 +31,7 @@ if ls /usr/share/zoneinfo/"$region" &> /dev/null; then
     echo "LANG=$new_lang" | tee /etc/locale.conf > /dev/null
 
     # Export the LANG variable
+    export LC_ALL=$new_lang
     export LANG=$new_lang
 
     echo "Locale configuration updated to $new_lang."
