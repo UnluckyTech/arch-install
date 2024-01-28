@@ -25,7 +25,6 @@ if [[ $erase == "y" ]]; then
             fdisk -l
             echo "For drive $device, you should see 3 partitions."
             echo "Returning to menu"
-            sleep 2
         elif [[ $rootsize == "n" ]]; then
             echo "Set root partition size"
             read partsize
