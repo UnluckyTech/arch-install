@@ -14,7 +14,7 @@ theme_name="chili"
 
 # Check if the sddm.conf file exists
  if [ -e "$sddm_conf_path" ]; then
-    Update the Current theme in sddm.conf
+    # Update the Current theme in sddm.conf
     sed -i "s/^Current=.*/Current=$theme_name/" "$sddm_conf_path"
     echo "SDDM theme updated to $theme_name"
  else
