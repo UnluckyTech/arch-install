@@ -18,7 +18,8 @@ do
     if [[ $option == "1" ]]; then
         echo "Configuring Network Manager"
         echo "Check docs for specifics"
-        yes | pacman -S networkmanager
+        yes | pacman -S networkmanager openssh
+        systemctl enable sshd
         systemctl enable NetworkManager
         echo "Done!"
 
