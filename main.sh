@@ -29,8 +29,9 @@ do
         echo '2. Configure Build'
         echo '3. Boot Loader'
         echo '4. Additional Configs'
-        echo '5. Chroot into System'
-        echo '6. Exit'
+        echo '5. Import dotfiles'
+        echo '6. Chroot into System'
+        echo '7. Exit'
         read option
         if [[ $option == "1" ]]; then
             . archprep.sh
@@ -41,8 +42,10 @@ do
         elif [[ $option == "4" ]]; then
             . addition.sh
         elif [[ $option == "5" ]]; then
-            . chroot.sh
+            . dotfiles.sh
         elif [[ $option == "6" ]]; then
+            . chroot.sh
+        elif [[ $option == "7" ]]; then
             exit
         else
             2>/dev/null
