@@ -15,7 +15,7 @@ do
     if [[ $option == "1" ]]; then
         echo "rEFInd does require manual configuration"
         echo "Check docs for specifics"
-        pacman -S git refind
+        pacman -S git refind --noconfirm
         echo "Specify drive for rEFInd"
         read device
         echo "Installing..."

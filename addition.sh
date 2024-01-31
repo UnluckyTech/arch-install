@@ -90,17 +90,17 @@ do
 
         read option
         if [[ $option == "1" ]]; then
-            pacman -S gnome gnome-extra
+            pacman -S gnome gnome-extra --noconfirm
         elif [[ $option == "2" ]]; then
-            pacman -S plasma
+            pacman -S plasma --noconfirm
         elif [[ $option == "3" ]]; then 
-            pacman -S xfce4 xfce4-goodies
+            pacman -S xfce4 xfce4-goodies --noconfirm
         elif [[ $option == "4" ]]; then
-            pacman -S hyprland kitty gtk3 dunst xdg-desktop-portal-hyprland qt5-wayland qt6-wayland pipewire polkit-kde-agent
+            pacman -S hyprland kitty gtk3 dunst xdg-desktop-portal-hyprland qt5-wayland qt6-wayland pipewire polkit-kde-agent --noconfirm
         elif [[ $option == "5" ]]; then
-            pacman -S awesome
+            pacman -S awesome --noconfirm
         elif [[ $option == "6" ]]; then
-            pacman -S i3-wm
+            pacman -S i3-wm --noconfirm
         elif [[ $option == "7" ]]; then
             break
         else

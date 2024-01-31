@@ -12,7 +12,7 @@ systemctl enable fstrim.timer
 echo "Would you like to update repo's used? (y/n)"
 read option
 if [[ $option == "y" ]]; then
-    yes | pacman -S nano bash-completion
+    pacman -S nano bash-completion --noconfirm
     nano /etc/pacman.conf
     pacman -Sy
 elif [[ $option == "n" ]]; then

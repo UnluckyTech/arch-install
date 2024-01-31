@@ -3,8 +3,8 @@
 echo "NOTE: This is for Nvidia!"
 echo "Ctrl+C to exit."
 sleep 2
-sudo yes | pacman -S git linux-headers
-sudo yes | pacman -S nvidia-dkms libglvnd nvidia-utils opencl-nvidia lib32-libglvnd lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings
+sudo yes | pacman -S git linux-headers --noconfirm
+sudo yes | pacman -S nvidia-dkms libglvnd nvidia-utils opencl-nvidia lib32-libglvnd lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings --noconfirm
 echo "Modifying mkinitcpio config..."
 sudo nano /etc/mkinitcpio.conf
 sudo mkdir /etc/pacman.d/hooks

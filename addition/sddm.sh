@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pacman -S sddm qt5-quickcontrols qt5-graphicaleffects
+pacman -S sddm qt5-quickcontrols qt5-graphicaleffects --noconfirm
 mkdir /etc/sddm.conf.d
 cp /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf.d/sddm.conf
 git clone https://github.com/MarianArlt/sddm-chili
