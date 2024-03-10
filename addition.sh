@@ -69,7 +69,7 @@ do
             fi
         done
     elif [[ $option == "4" ]]; then
-        pacman -S xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
+        pacman -S xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm --noconfirm
     elif [[ $option == "5" ]]; then
         . /$dir/addition/sddm.sh
     elif [[ $option == "6" ]]; then
