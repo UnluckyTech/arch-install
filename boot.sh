@@ -20,12 +20,12 @@ do
         read device
         echo "Installing..."
 
-        refind-install --usedefault ${device}1 --alldrivers
+        refind-install --usedefault ${device}p1 --alldrivers
         mkrlconf
         echo "Done!"
         echo "Editing boot config..."
         # Specify the content
-        content='"Boot with minimal options" "ro root='"${device}3"'"'
+        content='"Boot with minimal options" "ro root='"${device}p3"'"'
         # Specify the file path
         refind_linux_conf="/boot/refind_linux.conf"
         # Use echo to create/replace the file with the specified content
@@ -43,7 +43,7 @@ do
         git clone https://github.com/kgoettler/ursamajor-rEFInd.git
         echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/BOOT/refind.conf
         cd /arch-install
-        fatlabel ${device}1 ARCH
+        fatlabel ${device}p1 ARCH
         echo "Done! Hopefully it works!"
 
     elif [[ $option == "2" ]]; then
