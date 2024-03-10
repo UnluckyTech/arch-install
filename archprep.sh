@@ -25,21 +25,21 @@ do
         elif [[ $option == "3" ]]; then 
             if [[ "$device" ]]; then
                 echo "Mounting Partitions"
-                mount ${device}p3 /mnt
+                mount ${device}3 /mnt
                 mkdir /mnt/boot
                 mkdir /mnt/home
-                mount ${device}p1 /mnt/boot
-                swapon ${device}p2
+                mount ${device}1 /mnt/boot
+                swapon ${device}2
                 
             else
                 echo "What drive are we working with?"
                 read device 
                 echo "Mounting Partitions"
-                mount ${device}p3 /mnt
+                mount ${device}3 /mnt
                 mkdir /mnt/boot
                 mkdir /mnt/home
-                mount ${device}p1 /mnt/boot
-                swapon ${device}p2
+                mount ${device}1 /mnt/boot
+                swapon ${device}2
                 
             fi
         elif [[ $option == "4" ]]; then
