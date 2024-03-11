@@ -31,7 +31,7 @@ do
         read device
         user_device=$(get_partition_syntax "$device")
         echo "Installing..."
-
+        mkdir /boot/EFI
         cp -rf /usr/share/refind/ boot/EFI/refind/
         mv boot/EFI/refind/refind.conf-sample boot/EFI/refind/refind.conf
         echo "Done!"
