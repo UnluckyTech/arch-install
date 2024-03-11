@@ -32,8 +32,8 @@ do
         user_device=$(get_partition_syntax "$device")
         echo "Installing..."
 
-        refind-install --usedefault ${user_device}1 --alldrivers
-        mkrlconf
+        cp -rf /usr/share/refind/ boot/EFI/refind/
+        mv boot/EFI/refind/refind.conf-sample boot/EFI/refind/refind.conf
         echo "Done!"
         echo "Editing boot config..."
         # Specify the content
@@ -44,25 +44,21 @@ do
         echo "$content" | sudo tee "$refind_linux_conf" > /dev/null
         echo "File replaced: $refind_linux_conf"
         # Backup the original refind.conf
-        cp /boot/EFI/BOOT/refind.conf /boot/EFI/BOOT/refind.conf.bak
+        cp /boot/EFI/refind/refind.conf /boot/EFI/refind/refind.conf.bak
         # Modify the refind.conf with the new options
-        awk -v device="$user_device" '/menuentry "Arch Linux"/,/options/ {sub(/root=[^ ]+/, "root=" device "1\"")} 1' /boot/EFI/BOOT/refind.conf > /boot/EFI/BOOT/refind.conf.tmp
+        awk -v device="$user_device" '/menuentry "Arch Linux"/,/options/ {sub(/root=[^ ]+/, "root=" device "1\"")} 1' /boot/EFI/refind/refind.conf > /boot/EFI/refind/refind.conf.tmp
         # Replace the original file with the modified one
-        mv /boot/EFI/BOOT/refind.conf.tmp /boot/EFI/BOOT/refind.conf
+        mv /boot/EFI/refind/refind.conf.tmp /boot/EFI/refind/refind.conf
         echo "Refind.conf updated successfully!"
-        mkdir /boot/EFI/BOOT/themes
-        cd /boot/EFI/BOOT/themes
+        mkdir /boot/EFI/refind/themes
+        cd /boot/EFI/refind/themes
         git clone https://github.com/kgoettler/ursamajor-rEFInd.git
-        echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/BOOT/refind.conf
+        echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/refind/refind.conf
         cd /arch-install
         fatlabel ${user_device}1 ARCH
-        echo "Would you like to move configs to /boot/EFI/refind? [y/n]"
-        read option
-        if [[ $option == "y" ]]; then
-           . /configure/efi.sh
-        elif [[ $option == "n" ]]; then
-            echo ""
-        fi
+
+        efibootmgr --create --disk ${device} --part 1 --loader /EFI/refind/refind_x64.efi --label "rEFInd Boot Manager" --unicode
+
         echo "Done! Hopefully it works!"
 
     elif [[ $option == "2" ]]; then
