@@ -33,7 +33,7 @@ do
         echo "Installing..."
         mkdir /boot/EFI
         cp -rf /usr/share/refind/ boot/EFI/refind/
-        mv boot/EFI/refind/refind.conf-sample boot/EFI/refind/refind.conf
+        mv /boot/EFI/refind/refind.conf-sample boot/EFI/refind/refind.conf
         echo "Done!"
         echo "Editing boot config..."
         # Specify the content
