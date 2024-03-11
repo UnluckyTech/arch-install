@@ -44,6 +44,13 @@ do
         echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/BOOT/refind.conf
         cd /arch-install
         fatlabel ${device}1 ARCH
+        echo "Would you like to move configs to /boot/EFI/refind? [y/n]"
+        read option
+        if [[ $option == "y" ]]; then
+           . /configure/efi.sh
+        elif [[ $option == "n" ]]; then
+            echo ""
+        fi
         echo "Done! Hopefully it works!"
 
     elif [[ $option == "2" ]]; then
