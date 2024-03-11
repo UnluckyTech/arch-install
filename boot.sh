@@ -1,4 +1,15 @@
 #!/bin/bash
+
+get_partition_syntax() {
+    local device=$1
+
+    if [[ $2device == /dev/nvme* ]]; then
+        echo "${device}p"
+    else
+        echo "${device}"
+    fi
+}
+
 while true
 do
 
@@ -18,14 +29,15 @@ do
         pacman -S intel-ucode git refind --noconfirm
         echo "Specify drive for rEFInd"
         read device
+        user_device=$(get_partition_syntax "$device")
         echo "Installing..."
 
-        refind-install --usedefault ${device}1 --alldrivers
+        refind-install --usedefault ${user_device}1 --alldrivers
         mkrlconf
         echo "Done!"
         echo "Editing boot config..."
         # Specify the content
-        content='"Boot with minimal options" "ro root='"${device}3"'"'
+        content='"Boot with minimal options" "ro root='"${user_device}3"'"'
         # Specify the file path
         refind_linux_conf="/boot/refind_linux.conf"
         # Use echo to create/replace the file with the specified content
@@ -34,7 +46,7 @@ do
         # Backup the original refind.conf
         cp /boot/EFI/BOOT/refind.conf /boot/EFI/BOOT/refind.conf.bak
         # Modify the refind.conf with the new options
-        awk -v device="$device" '/menuentry "Arch Linux"/,/options/ {sub(/root=[^ ]+/, "root=" device "1\"")} 1' /boot/EFI/BOOT/refind.conf > /boot/EFI/BOOT/refind.conf.tmp
+        awk -v device="$user_device" '/menuentry "Arch Linux"/,/options/ {sub(/root=[^ ]+/, "root=" device "1\"")} 1' /boot/EFI/BOOT/refind.conf > /boot/EFI/BOOT/refind.conf.tmp
         # Replace the original file with the modified one
         mv /boot/EFI/BOOT/refind.conf.tmp /boot/EFI/BOOT/refind.conf
         echo "Refind.conf updated successfully!"
@@ -43,7 +55,7 @@ do
         git clone https://github.com/kgoettler/ursamajor-rEFInd.git
         echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/BOOT/refind.conf
         cd /arch-install
-        fatlabel ${device}1 ARCH
+        fatlabel ${user_device}1 ARCH
         echo "Would you like to move configs to /boot/EFI/refind? [y/n]"
         read option
         if [[ $option == "y" ]]; then

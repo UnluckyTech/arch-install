@@ -1,4 +1,15 @@
 #!/bin/bash
+
+get_partition_syntax() {
+    local device=$1
+
+    if [[ $2device == /dev/nvme* ]]; then
+        echo "${device}p"
+    else
+        echo "${device}"
+    fi
+}
+
 while true
 do
     if [ "$(cat /sys/firmware/efi/fw_platform_size)" = "64" ]; then
@@ -25,21 +36,22 @@ do
         elif [[ $option == "3" ]]; then 
             if [[ "$device" ]]; then
                 echo "Mounting Partitions"
-                mount ${device}3 /mnt
+                mount ${user_device}3 /mnt
                 mkdir /mnt/boot
                 mkdir /mnt/home
-                mount ${device}1 /mnt/boot
-                swapon ${device}2
+                mount ${user_device}1 /mnt/boot
+                swapon ${user_device}2
                 
             else
                 echo "What drive are we working with?"
                 read device 
+                user_device=$(get_partition_syntax "$device")
                 echo "Mounting Partitions"
-                mount ${device}3 /mnt
+                mount ${user_device}3 /mnt
                 mkdir /mnt/boot
                 mkdir /mnt/home
-                mount ${device}1 /mnt/boot
-                swapon ${device}2
+                mount ${user_device}1 /mnt/boot
+                swapon ${user_device}2
                 
             fi
         elif [[ $option == "4" ]]; then
