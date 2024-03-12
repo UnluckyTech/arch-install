@@ -16,9 +16,9 @@ echo "Specify drive for rEFInd"
 read device
 user_device=$(get_partition_syntax "$device")
 
-boot = "${user_device}1"
-swap = "${user_device}2"
-root = "${user_device}3"
+boot ="${user_device}1"
+swap ="${user_device}2"
+root ="${user_device}3"
 
 echo "Installing..."
 
