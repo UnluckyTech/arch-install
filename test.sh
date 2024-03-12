@@ -4,7 +4,7 @@
 get_partition_syntax() {
     local device=$1
 
-    if [[ $2device == /dev/nvme* ]]; then
+    if [[ $device == /dev/nvme* ]]; then
         echo "${device}p"
     else
         echo "${device}"
