@@ -21,12 +21,9 @@ swap="${user_device}2"
 root="${user_device}3"
 
 echo "Installing..."
-
-# Check if user_device is defined
-if [ -z "$user_device" ]; then
-    echo "Error: user_device not defined."
-    exit 1
-fi
+mkdir /boot/EFI
+cp -rf /usr/share/refind/ /boot/EFI/refind/
+mv /boot/EFI/refind/refind.conf-sample /boot/EFI/refind/refind.conf
 
 # Use sudo blkid to get PARTUUID
 
@@ -40,7 +37,6 @@ if [ -z "$partuuid1" ] || [ -z "$partuuid2" ] || [ -z "$partuuid3" ]; then
     echo "$partuuid1"
     echo "$partuuid2"
     echo "$partuuid3"
-
     exit 1
 fi
 
@@ -64,3 +60,21 @@ content='
 # Use echo to create the file with the specified content
 echo "$content" | sudo tee "$refind_linux_conf" > /dev/null
 echo "File created: $refind_linux_conf"
+
+# Backup the original refind.conf
+cp /boot/EFI/refind/refind.conf /boot/EFI/refind/refind.conf.bak
+
+# Modify the refind.conf with the new options
+awk -v partuuid="$partuuid3" '/menuentry "Arch Linux"/,/options/ {sub(/root=[^ ]+/, "root=PARTUUID=" partuuid "\"")} 1' /boot/EFI/refind/refind.conf > /boot/EFI/refind/refind.conf.tmp
+# Replace the original file with the modified one
+mv /boot/EFI/refind/refind.conf.tmp /boot/EFI/refind/refind.conf
+echo "Refind.conf updated successfully!"
+mkdir /boot/EFI/refind/themes
+cd /boot/EFI/refind/themes
+git clone https://github.com/kgoettler/ursamajor-rEFInd.git
+echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/refind/refind.conf
+cd /arch-install
+fatlabel ${user_device}1 ARCH
+
+efibootmgr --create --disk ${device} --part 1 --loader /EFI/refind/refind_x64.efi --label "rEFInd Boot Manager" --unicode
+echo "Done! Hopefully it works!"
