@@ -21,6 +21,10 @@ do
         yes | pacman -S networkmanager openssh
         systemctl enable sshd
         systemctl enable NetworkManager
+        iwlwifi_conf="/etc/modprobe.d/iwlwifi.conf"
+        content='options iwlmvm power_scheme=1'
+        # Use echo to create/replace the file with the specified content
+        echo "$content" | sudo tee "$iwlwifi_conf" > /dev/null
         echo "Done!"
 
     elif [[ $option == "2" ]]; then
