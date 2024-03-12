@@ -2,11 +2,15 @@
 echo "input device"
 read user_device
 echo "Editing boot config..."
-content='"Boot with minimal options" "rw root='"${user_device}3"'"'
-# Specify the file path
 refind_linux_conf="/boot/refind_linux.conf"
-# Use sed to replace "ro" with "rw" in the file content
-sudo sed -i 's/ro/rw/' "$refind_linux_conf"
-# Use echo to create/replace the file with the modified content
+
+# Define the content
+content='
+"Boot with standard options"  "rw root=${user_device}"
+"Boot to single-user mode"    "rw root=${user_device} single"
+"Boot with minimal options"   "ro root=${user_device}"
+'
+
+# Use echo to create the file with the specified content
 echo "$content" | sudo tee "$refind_linux_conf" > /dev/null
-echo "File replaced: $refind_linux_conf"
+echo "File created: $refind_linux_conf"
