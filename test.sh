@@ -16,9 +16,9 @@ echo "Specify drive for rEFInd"
 read device
 user_device=$(get_partition_syntax "$device")
 
-boot ="${user_device}1"
-swap ="${user_device}2"
-root ="${user_device}3"
+boot="${user_device}1"
+swap="${user_device}2"
+root="${user_device}3"
 
 echo "Installing..."
 
@@ -37,6 +37,10 @@ partuuid3=$(sudo blkid -s PARTUUID -o value "$root")
 # Check if PARTUUID is found
 if [ -z "$partuuid1" ] || [ -z "$partuuid2" ] || [ -z "$partuuid3" ]; then
     echo "Error: One or more PARTUUIDs not found."
+    echo "$partuuid1"
+    echo "$partuuid2"
+    echo "$partuuid3"
+
     exit 1
 fi
 
