@@ -1,7 +1,21 @@
 #!/bin/bash
 
-echo "input device"
-read user_device
+
+get_partition_syntax() {
+    local device=$1
+
+    if [[ $2device == /dev/nvme* ]]; then
+        echo "${device}p"
+    else
+        echo "${device}"
+    fi
+}
+
+pacman -S intel-ucode git refind --noconfirm
+echo "Specify drive for rEFInd"
+read device
+user_device=$(get_partition_syntax "$device")
+echo "Installing..."
 
 # Check if user_device is defined
 if [ -z "$user_device" ]; then
@@ -10,7 +24,7 @@ if [ -z "$user_device" ]; then
 fi
 
 # Use sudo blkid to get PARTUUID
-partuuid=$(sudo blkid -s PARTUUID -o value "$user_device")
+partuuid=$(sudo blkid -s PARTUUID -o value "$user_device"3)
 
 # Check if PARTUUID is found
 if [ -z "$partuuid" ]; then
