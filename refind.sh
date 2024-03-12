@@ -52,9 +52,9 @@ refind_linux_conf="/boot/refind_linux.conf"
 
 # Define the content with the ${user_device} variable
 content='
-"Boot with standard options"  "rw root=PARTUUID='"${partuuid3}"'"
-"Boot to single-user mode"    "rw root=PARTUUID='"${partuuid3}"' single"
-"Boot with minimal options"   "ro root=PARTUUID='"${partuuid3}"'"
+"Boot with standard options"  "rw root=PARTUUID='"${partuuid3}"' mds=full,nosmt"
+"Boot to single-user mode"    "rw root=PARTUUID='"${partuuid3}"' single mds=full,nosmt"
+"Boot with minimal options"   "ro root=PARTUUID='"${partuuid3}"' mds=full,nosmt"
 '
 
 # Use echo to create the file with the specified content
