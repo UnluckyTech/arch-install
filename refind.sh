@@ -52,9 +52,9 @@ refind_linux_conf="/boot/refind_linux.conf"
 
 # Define the content with the ${user_device} variable
 content='
-"Boot with standard options"  "rw root=PARTUUID='"${partuuid3}"' mds=full,nosmt"
-"Boot to single-user mode"    "rw root=PARTUUID='"${partuuid3}"' single mds=full,nosmt"
-"Boot with minimal options"   "ro root=PARTUUID='"${partuuid3}"' mds=full,nosmt"
+"Boot with standard options"  "rw root=PARTUUID='"${partuuid3}"' mds=full,nosmt add_efi_memmap quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"
+"Boot to single-user mode"    "rw root=PARTUUID='"${partuuid3}"' single mds=full,nosmt add_efi_memmap quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"
+"Boot with minimal options"   "ro root=PARTUUID='"${partuuid3}"' mds=full,nosmt add_efi_memmap quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"
 '
 
 # Use echo to create the file with the specified content
@@ -75,6 +75,6 @@ git clone https://github.com/kgoettler/ursamajor-rEFInd.git
 echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/refind/refind.conf
 cd /arch-install
 fatlabel ${user_device}1 ARCH
-
+. /plymouth/plymouth.sh
 efibootmgr --create --disk ${device} --part 1 --loader /EFI/refind/refind_x64.efi --label "rEFInd Boot Manager" --unicode
 echo "Done! Hopefully it works!"
