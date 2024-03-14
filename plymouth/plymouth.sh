@@ -14,9 +14,9 @@ else
 fi
 
 mkinitcpio -P
-rm -rf /usr/share/plymouth/themes/spinner/Watermark.png
+rm -rf /usr/share/plymouth/themes/spinner/watermark.png
 rm -rf /usr/share/plymouth/themes/spinner/spinner.plymouth
 cp -r /arch-install/plymouth/spinner.plymouth /usr/share/plymouth/themes/spinner/spinner.plymouth
-sudo cp -r /boot/EFI/refind/themes/ursamajor-rEFInd/icons/os_arch.png /usr/share/plymouth/themes/spinner/Watermark.png
+sudo cp -r /boot/EFI/refind/themes/ursamajor-rEFInd/icons/os_arch.png /usr/share/plymouth/themes/spinner/watermark.png
 
 sudo plymouth-set-default-theme -R spinner

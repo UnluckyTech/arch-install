@@ -75,6 +75,6 @@ git clone https://github.com/kgoettler/ursamajor-rEFInd.git
 echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/refind/refind.conf
 cd /arch-install
 fatlabel ${user_device}1 ARCH
-. /plymouth/plymouth.sh
+. /arch-install/plymouth/plymouth.sh
 efibootmgr --create --disk ${device} --part 1 --loader /EFI/refind/refind_x64.efi --label "rEFInd Boot Manager" --unicode
 echo "Done! Hopefully it works!"
