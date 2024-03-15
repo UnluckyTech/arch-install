@@ -20,7 +20,7 @@ read erase
 
 if [[ $erase == "y" ]]; then
     echo "This will take a minute depending on size."
-    wipefs --all --force $device
+    # wipefs --all --force $device
 
     # Create EFI system (assuming 1GiB size), swap partition (user-defined size), root partition with remaining space.
     echo "How much storage in GB would you like on swap?"
