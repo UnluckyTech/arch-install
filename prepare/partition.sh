@@ -69,7 +69,7 @@ if [[ $num_partitions -gt 1 ]]; then
         echo "Use remaining space for root partition? [y/n]"
         read rootsize
             if [[ $rootsize == "y" ]]; then
-                ( echo 'g' ; echo 'n' ; echo '1' ; echo '' ; echo '+1G' ; echo 't' ; echo '1' ; echo 'n' ; echo '2' ; echo '' ; echo "+${swapgb}G" ; echo 't' ; echo '2' ; echo '19' ; echo 'n' ; echo '3' ; echo '' ; echo '' ; echo 'w' ) | fdisk "$device"
+                ( echo 'n' ; echo '5' ; echo '' ; echo '+1G' ; echo 't' ; echo '5' ; echo 'n' ; echo '6' ; echo '' ; echo "+${swapgb}G" ; echo 't' ; echo '6' ; echo '19' ; echo 'n' ; echo '7' ; echo '' ; echo '' ; echo 'w' ) | fdisk "$device"
 
                 # Format partitions
                 mkfs.fat -F32 "${user_device}5"  # Format EFI partition
@@ -83,7 +83,7 @@ if [[ $num_partitions -gt 1 ]]; then
             elif [[ $rootsize == "n" ]]; then
                 echo "Set root partition size"
                 read partsize
-                ( echo 'g' ; echo 'n' ; echo '1' ; echo '' ; echo '+1G' ; echo 't' ; echo '1' ; echo 'n' ; echo '2' ; echo '' ; echo "+${swapgb}G" ; echo 't' ; echo '2' ; echo '19' ; echo 'n' ; echo '3' ; echo '' ; echo "+${partsize}G" ; echo 'w' ) | fdisk "$device"
+                ( echo 'n' ; echo '5' ; echo '' ; echo '+1G' ; echo 't' ; echo '5' ; echo 'n' ; echo '6' ; echo '' ; echo "+${swapgb}G" ; echo 't' ; echo '6' ; echo '19' ; echo 'n' ; echo '7' ; echo '' ; echo "+${partsize}G" ; echo 'w' ) | fdisk "$device"
 
                 # Format partitions
                 mkfs.fat -F32 "${user_device}5"  # Format EFI partition
