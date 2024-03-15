@@ -68,6 +68,18 @@ cp /boot/EFI/refind/refind.conf /boot/EFI/refind/refind.conf.bak
 awk -v partuuid="$partuuid3" '/menuentry "Arch Linux"/,/options/ {sub(/root=[^ ]+/, "root=PARTUUID=" partuuid "\"")} 1' /boot/EFI/refind/refind.conf > /boot/EFI/refind/refind.conf.tmp
 # Replace the original file with the modified one
 mv /boot/EFI/refind/refind.conf.tmp /boot/EFI/refind/refind.conf
+
+# Path to the refind.conf file
+refind_conf="/boot/EFI/refind/refind.conf"
+
+# Define the line to uncomment
+use_graphics="use_graphics_for osx,linux"
+
+# Uncomment the line by removing the '#' character at the beginning
+sed -i "s/^# $use_graphics/$use_graphics/" "$refind_conf"
+
+echo "Line '$use_graphics' uncommented in refind.conf."
+
 echo "Refind.conf updated successfully!"
 mkdir /boot/EFI/refind/themes
 cd /boot/EFI/refind/themes
