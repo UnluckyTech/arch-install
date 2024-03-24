@@ -73,8 +73,8 @@ if [[ $num_partitions -gt 1 ]]; then
 
                 # Format partitions
                 mkfs.fat -F32 "${user_device}5"  # Format EFI partition
-                mkfs.ext4 "${user_device}6"      # Format root partition
-                mkswap "${user_device}7"         # Format swap partition
+                mkfs.ext4 "${user_device}7"      # Format root partition
+                mkswap "${user_device}6"         # Format swap partition
 
                 # Display partition information
                 fdisk -l
@@ -87,8 +87,8 @@ if [[ $num_partitions -gt 1 ]]; then
 
                 # Format partitions
                 mkfs.fat -F32 "${user_device}5"  # Format EFI partition
-                mkfs.ext4 "${user_device}6"      # Format root partition
-                mkswap "${user_device}7"         # Format swap partition
+                mkfs.ext4 "${user_device}7"      # Format root partition
+                mkswap "${user_device}6"         # Format swap partition
 
                 # Display partition information
                 fdisk -l
