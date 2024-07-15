@@ -11,7 +11,22 @@ get_partition_syntax() {
     fi
 }
 
-pacman -S intel-ucode git refind --noconfirm
+while true; do
+    echo 'AMD or Intel CPU'
+    read option
+
+    if [[ $option == "amd" ]]; then
+        pacman -S amd-ucode --noconfirm
+        break  # Exit the loop after installing amd-ucode
+    elif [[ $option == "intel" ]]; then
+        pacman -S intel-ucode --noconfirm
+        break  # Exit the loop after installing intel-ucode
+    else
+        echo 'Incorrect command. Try again.'
+    fi
+done
+
+pacman -S git refind --noconfirm
 echo "Specify drive for rEFInd"
 read device
 user_device=$(get_partition_syntax "$device")
@@ -21,9 +36,9 @@ swap="${user_device}2"
 root="${user_device}3"
 
 echo "Installing..."
-mkdir /boot/EFI
-cp -rf /usr/share/refind/ /boot/EFI/refind/
-mv /boot/EFI/refind/refind.conf-sample /boot/EFI/refind/refind.conf
+mkdir /efi/EFI
+cp -rf /usr/share/refind/ /efi/EFI/refind/
+mv /efi/EFI/refind/refind.conf-sample /efi/EFI/refind/refind.conf
 
 # Use sudo blkid to get PARTUUID
 
@@ -52,9 +67,9 @@ refind_linux_conf="/boot/refind_linux.conf"
 
 # Define the content with the ${user_device} variable
 content='
-"Boot with standard options"  "rw root=PARTUUID='"${partuuid3}"' mds=full,nosmt add_efi_memmap quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"
-"Boot to single-user mode"    "rw root=PARTUUID='"${partuuid3}"' single mds=full,nosmt add_efi_memmap quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"
-"Boot with minimal options"   "ro root=PARTUUID='"${partuuid3}"' mds=full,nosmt add_efi_memmap quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"
+"Boot with standard options"  "rw root=PARTUUID='"${partuuid3}"' mds=full,nosmt add_efi_memmap loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"
+"Boot to single-user mode"    "rw root=PARTUUID='"${partuuid3}"' single mds=full,nosmt add_efi_memmap loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"
+"Boot with minimal options"   "ro root=PARTUUID='"${partuuid3}"' mds=full,nosmt add_efi_memmap loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"
 '
 
 # Use echo to create the file with the specified content
@@ -62,15 +77,15 @@ echo "$content" | sudo tee "$refind_linux_conf" > /dev/null
 echo "File created: $refind_linux_conf"
 
 # Backup the original refind.conf
-cp /boot/EFI/refind/refind.conf /boot/EFI/refind/refind.conf.bak
+cp /efi/EFI/refind/refind.conf /efi/EFI/refind/refind.conf.bak
 
 # Modify the refind.conf with the new options
-awk -v partuuid="$partuuid3" '/menuentry "Arch Linux"/,/options/ {sub(/root=[^ ]+/, "root=PARTUUID=" partuuid "\"")} 1' /boot/EFI/refind/refind.conf > /boot/EFI/refind/refind.conf.tmp
+awk -v partuuid="$partuuid3" '/menuentry "Arch Linux"/,/options/ {sub(/root=[^ ]+/, "root=PARTUUID=" partuuid "\"")} 1' /efi/EFI/refind/refind.conf > /efi/EFI/refind/refind.conf.tmp
 # Replace the original file with the modified one
-mv /boot/EFI/refind/refind.conf.tmp /boot/EFI/refind/refind.conf
+mv /efi/EFI/refind/refind.conf.tmp /efi/EFI/refind/refind.conf
 
 # Path to the refind.conf file
-refind_conf="/boot/EFI/refind/refind.conf"
+refind_conf="/efi/EFI/refind/refind.conf"
 
 # Define the line to uncomment
 use_graphics="use_graphics_for osx,linux"
@@ -81,12 +96,12 @@ sed -i "s/^# $use_graphics/$use_graphics/" "$refind_conf"
 echo "Line '$use_graphics' uncommented in refind.conf."
 
 echo "Refind.conf updated successfully!"
-mkdir /boot/EFI/refind/themes
-cd /boot/EFI/refind/themes
+mkdir /efi/EFI/refind/themes
+cd /efi/EFI/refind/themes
 git clone https://github.com/kgoettler/ursamajor-rEFInd.git
-echo "include themes/ursamajor-rEFInd/theme.conf" >> /boot/EFI/refind/refind.conf
+echo "include themes/ursamajor-rEFInd/theme.conf" >> /efi/EFI/refind/refind.conf
 cd /arch-install
 fatlabel ${user_device}1 ARCH
-. /arch-install/plymouth/plymouth.sh
+# . /arch-install/plymouth/plymouth.sh
 efibootmgr --create --disk ${device} --part 1 --loader /EFI/refind/refind_x64.efi --label "rEFInd Boot Manager" --unicode
 echo "Done! Hopefully it works!"

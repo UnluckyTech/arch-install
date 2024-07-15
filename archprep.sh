@@ -37,9 +37,9 @@ do
             if [[ "$device" ]]; then
                 echo "Mounting Partitions"
                 mount ${user_device}3 /mnt
-                mkdir /mnt/boot
+                mkdir /mnt/efi
                 mkdir /mnt/home
-                mount ${user_device}1 /mnt/boot
+                mount ${user_device}1 /mnt/efi
                 swapon ${user_device}2
                 
             else
